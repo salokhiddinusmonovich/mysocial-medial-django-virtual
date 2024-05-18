@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: gunicorn a_core.wsgi:application --bind 0.0.0.0:8000
+    expose:
+      - 8000
+    volumes:
+      - media_file:/app/media
+      - static_files:/app/static
+    depends_on:
+      - db
+
+
+  db:
+    image: postgres:16
+    env_file:
+      - .db.env
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    volumes:
+      - media_file:/app/media
+      - static_files:/app/static
+    depends_on:
+      - web
+
+
+
+volumes:
+  media_file:
+  static_files:

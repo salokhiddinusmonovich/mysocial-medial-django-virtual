@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'layouts/c.html' %}
+
+{% block content %}
+    <h1>Login Here</h1>
+    <form method="POST" autocomplete="off">
+        {% csrf_token %}
+
+        {{ login.as_p }}
+
+        <input type="submit" value="Login"/>
+    </form>
+{% endblock %}

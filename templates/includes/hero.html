@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<hero class="grid bg-gray-700 text-white text-center bg-cover z-10 relative bg-[url('https://cdna.artstation.com/p/assets/images/images/067/447/186/large/tinybuild-games-artboard-49-1x-1-05.jpg?1695383667')]">
+    <div class="col-start-1 row-start-1 bg-gray-800 bg-opacity-40 w-full h-full"></div>
+    <div class="col-start-1 row-start-1 py-24 px-10 ">
+        <h1 class="font1 text-6xl title-fadein">SalokhiddinEngineer</h1>
+        <p class="text-lg font-bold mb-5">Share your favorite Photos from Flickr and add a great caption</p>
+        {% if not user.is_authenticated %}
+        <a class="button" href="{% url 'register' %}">Get Started</a>
+        {% else %}
+         <a class="button" href="{% url 'post-create' %}">Get Started</a>
+        {% endif %}
+    </div>
+</hero>

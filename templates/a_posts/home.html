@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'layouts/a.html' %}
 
-</body>
-</html>
+
+{% block content %}
+
+
+{% for post in posts %}
+
+{% include 'a_posts/post.html' %}
+
+{% endfor %}
+
+
+
+{% endblock %}
