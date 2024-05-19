@@ -31,7 +31,7 @@
                         <img class="w-6 h-6 rounded-full object-cover mr-1" src="{{ post.author.profile.avatar }}">
                         <span class="font-bold text-sm mr-1">{{ post.author.username }}</span>
                         {% else %}
-                        <img class="w-6 h-6 rounded-full object-cover mr-1" src="{% static 'images/avatar_default.svg' %}">
+                        <img class="w-6 h-6 rounded-full object-cover mr-1" src="{% static 'images/avatar_default.png' %}">
                         <span class="text-sm mr-1">no author</span>
                         {% endif %}
                     </div>
@@ -54,7 +54,7 @@
                         {% if comment.author %}
                         <img class="w-6 h-6 rounded-full object-cover mr-1" src="{{ comment.author.profile.avatar }}">
                         {% else %}
-                        <img class="w-6 h-6 rounded-full object-cover mr-1" src="{% static 'images/avatar_default.svg' %}">
+                        <img class="w-6 h-6 rounded-full object-cover mr-1" src="{% static 'images/avatar_default.png' %}">
                         {% endif %}
                         <span class="font-bold text-sm mr-1 truncate">{% if comment.author %}{{ comment.author.username }}{% else %}<span class="font-light">no author</span>{% endif %} : {{ comment.body|truncatechars:10 }}</span>
                     </div>
