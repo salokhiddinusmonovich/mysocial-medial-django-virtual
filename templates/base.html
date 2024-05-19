@@ -24,64 +24,32 @@
             --font1: 'Lobster', sans-serif;
         }
         h1 {
-            @apply text-4xl font-bold mb-4
+            @apply text-4xl font-bold mb-4;
         }
         h2 {
-            @apply text-2xl font-bold mb-3
+            @apply text-2xl font-bold mb-3;
         }
         h3 {
-            @apply text-lg font-bold
+            @apply text-lg font-bold;
         }
         .font1 {
             font-family: var(--font1);
         }
         .button, button, [type='submit'], [type='button'] {
-            display: inline-flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            text-align: center;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            padding: 0 1rem;
-            min-height: 3.3rem;
-            font-weight: 600;
-            box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1);
-            transition-property: transform;
-            transition-duration: .2s;
-            color: white;
-            background-color: var(--primary);
+            @apply inline-flex items-center justify-center text-white bg-[var(--primary)] hover:bg-[var(--primary-hover)] rounded-lg px-4 py-2 font-semibold shadow-md transition-transform transform duration-200;
             width: fit-content;
-        }
-        .button:hover, button:hover, [type='submit']:hover, [type='button']:hover {
-            background-color: var(--primary-hover);
         }
         .button:active, button:active, [type='submit']:active, [type='button']:active {
             transform: scale(0.95);
         }
         .secondaryAction {
-            background-color: white;
-            color: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(0, 0, 0, 0.3);
-        }
-        .secondaryAction:hover, .button.secondaryAction:hover {
-            background-color: rgba(0, 0, 0, 0.05);
+            @apply inline-flex items-center justify-center text-gray-600 bg-white border border-gray-300 hover:bg-gray-100 rounded-lg px-4 py-2 font-semibold;
         }
         .navitems>li>a {
             @apply flex items-center gap-2 h-12 px-4 hover:bg-gray-700 rounded-lg;
         }
         .card {
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            position: relative;
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-            background-color: white;
-            padding-bottom: 1rem;
-            width: 100%;
+            @apply flex flex-col overflow-hidden relative rounded-lg shadow-lg mb-8 bg-white pb-4 w-full;
         }
         .hoverlist>* {
             @apply hover:bg-gray-100 rounded-md transition duration-150;
@@ -90,7 +58,7 @@
             @apply flex items-center p-2;
         }
         .highlight {
-            @apply !bg-indigo-100;
+            @apply bg-indigo-100;
         }
         .titleBlip {
             animation: 1s fadeIn;
@@ -108,32 +76,28 @@
             margin-bottom: 1rem;
         }
         form p {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
+            @apply flex items-center mb-4;
         }
         label, input {
-          display: inline-block;
+            @apply inline-block;
         }
         form p label {
-            width: 7rem;
-            }
+            @apply w-28;
+        }
         label {
-            margin: 6px 0 3px;
+            @apply mb-1;
         }
         input, textarea {
-            width: 100%;
+            @apply w-full;
         }
         input[type="file"], select {
-            background-color: white;
-            padding-left: 0;
+            @apply bg-white pl-0;
         }
         label[for="id_remember"] {
-            width: auto;
-            margin-right: 0.5rem;
+            @apply mr-2;
         }
         input[name="remember"] {
-            width: auto;
+            @apply w-auto;
         }
         .btn-red {
             @apply inline-flex bg-red-500;
@@ -142,88 +106,51 @@
             @apply bg-red-600;
         }
         .login .secondaryAction {
-            box-shadow: none;
-            display: block;
-            padding: none;
-            padding: 0px;
-            border: none;
-            font-size: smaller;
-            font-weight: normal;
-            min-height: auto;
-            margin-bottom: 1.5rem;
+            @apply shadow-none block px-0 border-none text-sm font-normal mb-6;
         }
         .login .secondaryAction:hover {
             @apply text-gray-500 underline bg-white;
         }
         #id_tags {
-            margin-bottom: 1rem;
+            @apply mb-4;
         }
         #id_tags div {
-            display: inline-block;
-            margin-right: 0.5rem;
+            @apply inline-block mr-2;
         }
         #id_tags div label {
-            border-radius: 9999px;
-            padding: 0.5rem 1rem;
-            border: 1px solid rgb(229 231 235);
-            width: auto;
-            cursor: pointer;
-            user-select: none;
+            @apply rounded-full px-4 py-2 border border-gray-300 cursor-pointer;
         }
         #id_tags input {
-            display: none;
+            @apply hidden;
         }
         #id_tags label:has(input:checked) {
-            background-color: var(--black);
-            color: white;
-            border: 1px solid var(--black);
+            @apply bg-black text-white border-black;
         }
         .textarea, textarea {
-            margin-bottom: 1rem;
-        }
-        .textarea, textarea, input {
-            border-radius: 0.5rem;
-            padding: 1rem 1.2rem;
-            background-color: rgba(232, 240, 254, 1);
+            @apply mb-4 rounded-lg p-4 bg-blue-100;
         }
         .errorlist li {
-            color: rgb(253, 88, 49);
-            padding: 0.5rem;
-            padding-left: 1rem;
-            border-left: 5px solid rgb(253, 88, 49);
-            margin-bottom: 1rem;
+            @apply text-red-500 pl-4 border-l-4 border-red-500 mb-4;
         }
         .tab {
-            cursor: pointer;
-            padding: 0.75rem 1rem;
-            color: rgb(0,0,0,0.6);
-            background-color: rgb(0,0,0,0.05);
-            border-radius: 0.75rem;
-            text-align: center;
-            display: flex;
-            align-items: center;
+            @apply cursor-pointer px-4 py-3 text-gray-600 bg-gray-100 rounded-xl text-center flex items-center;
         }
         .tab:hover {
-            background-color: rgb(0,0,0,0.1);
+            @apply bg-gray-200;
         }
         .tab.selected {
-            color: white;
-            background-color: var(--black);
+            @apply text-white bg-black;
         }
         .replyform {
             border-top: none;
         }
         .replyform textarea, .replyform input {
-            padding: 0.75rem 1rem;
-            font-size: 1rem;
-            margin-bottom: 0px;
-            height: 3.2rem;
+            @apply px-4 py-2 mb-0 h-12;
         }
         .replyform button {
-            margin-left: 0.5rem;
-            min-height: unset;
+            @apply ml-2;
         }
-        .fade-me-in.htmx-settling{
+        .fade-me-in.htmx-settling {
             opacity: 0;
         }
         .fade-me-in {
@@ -246,8 +173,6 @@
 
 {% block layout %}
 {% endblock %}
-
-
 
 </body>
 </html>
