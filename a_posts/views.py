@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from requests import Response
 from .forms import *
 from a_posts.models import *
+from django.db.models import Count
 from django import forms
 from django.forms import ModelForm
 from bs4 import BeautifulSoup
@@ -18,10 +19,11 @@ def home_view(request, tag=None):
         tag = get_object_or_404(Tag, slug=tag)
     else:
         posts = Post.objects.all()
-    categories = Tag.objects.all()
+
+
+
     context = {
         'posts': posts,
-        'categories': categories,
         'tag': tag
     }
     return render(request, 'a_posts/home.html', context)
@@ -95,13 +97,24 @@ def post_edit_view(request, pk):
 
 def post_page_view(request, pk):
     post = get_object_or_404(Post, id=pk)
-    replyform = ReplyCreateForm
     commentform = CommentCreatForm()
+    replyform = ReplyCreateForm
+    categories = Tag.objects.all()
+
+    if request.htmx:
+        if 'top' in request.GET:
+            # comments = post.comments.filter(likes__isnull=False).distinct()
+            comments = post.comments.annotate(num_likes=Count('likes')).filter(num_likes__gt=0).order_by('-num_likes')
+        else:
+            comments = post.comments.all()
+        return render(request, 'snippets/loop_postpage_comments.html', {'comments': comments, 'replyform': replyform})
+
+
 
     context = {
         'post': post,
         'commentform': commentform,
-        'replyform': replyform
+        'replyform': replyform,
     }
 
     return render(request, 'a_posts/post_page.html', context)

@@ -18,7 +18,7 @@
     </section>
     <section class="card p-4">
         <div class="flex items-center">
-            <img class="w-7 mr-2 -mt-3" src="{% static 'images/fireheart_black.svg' %}"/>
+            <img class="w-7 mr-2 -mt-3" src="{% static 'images/fireheart_red.svg' %}"/>
             <h2>Top Posts</h2>
         </div>
         <ul class="hoverlist">
@@ -35,7 +35,7 @@
                         <span class="text-sm mr-1">no author</span>
                         {% endif %}
                     </div>
-                    <span class="{% if user in post.likes.all %}font-bold{% else %}font-light{% endif %} text-sm  text-grey-500 shrink-0">{{ post.likes.count }} Like{{ post.likes.count|pluralize:'s' }} / {{ post.comments.count }}</span>
+                    <span class="{% if user in post.likes.all %}font-bold{% else %}font-light{% endif %} text-sm  text-grey-500 shrink-0">{{ post.likes.count }} Like{{ post.likes.count|pluralize:'s' }}</span>
                 </a>
             </li>
             {% endfor %}
@@ -43,7 +43,7 @@
     </section>
     <section class="card p-4">
         <div class="flex items-center">
-            <img class="w-7 mr-2 -mt-3" src="{% static 'images/fireheart_black.svg' %}"/>
+            <img class="w-7 mr-2 -mt-3" src="{% static 'images/fireheart_red.svg' %}"/>
             <h2>Top Comments</h2>
         </div>
         <ul class="hoverlist">
@@ -58,7 +58,7 @@
                         {% endif %}
                         <span class="font-bold text-sm mr-1 truncate">{% if comment.author %}{{ comment.author.username }}{% else %}<span class="font-light">no author</span>{% endif %} : {{ comment.body|truncatechars:10 }}</span>
                     </div>
-                    <span class="{% if user in comment.likes.all %}font-bold{% else %}font-light{% endif %} text-sm text-grey-500 shrink-0">{{ comment.likes.count }} Like{{ comment.likes.count|pluralize:'s' }} / {{ comment.replies.count }}</span>
+                    <span class="{% if user in comment.likes.all %}font-bold{% else %}font-light{% endif %} text-sm text-grey-500 shrink-0">{{ comment.likes.count }}Like{{ comment.likes.count|pluralize:'s' }}</span>
                 </a>
             </li>
             {% endfor %}

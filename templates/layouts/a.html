@@ -17,7 +17,8 @@
 
       {% endblock %}
     </main>
-    {% include 'includes/sidebar.html' %}
+    {% load sidebar %}
+    {% sidebar_view user %} 
 </content>
 
 {% endblock %}

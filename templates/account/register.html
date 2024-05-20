@@ -5,12 +5,38 @@
         .hidden-description {
             display: none;
         }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 300px;
+            margin: auto;
+        }
+        label, input {
+            display: block;
+            width: 100%;
+        }
     </style>
 
     <h1>Register Now</h1>
     <form method="POST" autocomplete="off">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div>
+            {{ form.username.label_tag }}
+            {{ form.username }}
+        </div>
+        <div>
+            {{ form.email.label_tag }}
+            {{ form.email }}
+        </div>
+        <div>
+            {{ form.password1.label_tag }}
+            {{ form.password1 }}
+        </div>
+        <div>
+            {{ form.password2.label_tag }}
+            {{ form.password2 }}
+        </div>
         <input type="submit" value="Register"/>
     </form>
 {% endblock %}
