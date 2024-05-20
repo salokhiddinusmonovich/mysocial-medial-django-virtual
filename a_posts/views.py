@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 import requests
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from django.core.paginator import Paginator
 
 
 def home_view(request, tag=None):
@@ -20,12 +20,22 @@ def home_view(request, tag=None):
     else:
         posts = Post.objects.all()
 
-
+    paginator = Paginator(posts, 3)
+    page = int(request.GET.get('page', 1))
+    try:
+        posts = paginator.page(page)
+    except:
+        return HttpResponse('')
 
     context = {
         'posts': posts,
-        'tag': tag
+        'tag': tag,
+        'page': page
     }
+
+    if request.htmx:
+        return render(request, 'snippets/loop_home_posts.html', context)
+
     return render(request, 'a_posts/home.html', context)
 
 
