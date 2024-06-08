@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import *
+from django.shortcuts import redirect
+from .views import chat_view  # Ensure your views are imported correctly
 
 urlpatterns = [
     path('', lambda request: redirect('chatroom', chatroom_name='OurChat'), name='home'),
