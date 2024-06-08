@@ -9,13 +9,14 @@
             </svg>
         </div>
     </li>
-{% else %}     
+{% else %}
 <li>
         <div class="flex justify-start">
             <div class="flex items-end mr-2">
-                <a href="{% url 'profile' message.author.username %}">
-                    <img class="w-8 h-8 rounded-full object-cover" src="{{ message.author.profile.avatar }}">
-                </a>
+                <a href="{% url 'profile_pr' message.author.username %}">
+    <img class="w-8 h-8 rounded-full object-cover" src="{{ message.author.profile.avatar }}">
+</a>
+
             </div>
             <div class="flex items-end">
                 <svg height="13" width="8">

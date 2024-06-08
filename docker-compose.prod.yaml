@@ -3,7 +3,7 @@ version: '3'
 services:
   web:
     build: .
-    command: gunicorn a_core.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn a_core.asgi:application --bind 0.0.0.0:8000
     expose:
       - 8000
     volumes:
@@ -11,6 +11,7 @@ services:
       - static_files:/app/staticfiles
     depends_on:
       - db
+      - redis
 
 
   db:
@@ -28,7 +29,10 @@ services:
     depends_on:
       - web
 
-
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: unless-stopped
 
 volumes:
   media_file:

@@ -20,12 +20,11 @@ urlpatterns = [
     path('post/<pk>/', post_page_view, name='post'),
     path('post/like/<pk>/', like_post, name='like-post'),
     path('comment/like/<pk>/', like_comment, name='like-comment'),
-    path('reply/like/<pk>/', like_reply , name='like-reply'),
+    path('reply/like/<pk>/', like_reply, name='like-reply'),
     path('login/', login, name='login'),
     path('register/', register, name='register'),
     path('logout/', logout, name='logout'),
     path('profile/', profile_view, name='profile'),
-    path('profile/<str:username>/', profile_view, name='profile'),
     path('<username>/', profile_view, name='userprofile'),
     path('profile/edit/', profile_edit_view, name='profile-edit'),
     path('profile/delete/', profile_delete_view, name='profile-delete'),
@@ -33,7 +32,14 @@ urlpatterns = [
     path('comment/delete/<pk>/', comment_delete_view, name='comment-delete'),
     path('reply-sent/<pk>/', reply_sent, name='reply-sent'),
     path('reply/delete/<pk>/', reply_delete_view, name='reply-delete'),
+    path('<username>/', profile_view, name='profile_pr')
 ]
+
+
+
+
+
+
 
 from django.conf.urls.static import static
 

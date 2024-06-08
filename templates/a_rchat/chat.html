@@ -1,10 +1,13 @@
 {% extends 'layouts/b.html' %}
+{% load static %}
+
 
 {% block content %}
 <wrapper class="block max-w-2xl mx-auto my-10 px-6">
     <div id="chat_window" class="h-[45rem] flex flex-col bg-gray-800 rounded-2xl shadow-2xl relative p-1">
         <div class="flex justify-center text-emerald-400 bg-gray-800 p-2 sticky top-0 z-10">
-            <span id="online-count" class="pr-1">3</span> online
+            <div id="online-icon-status"></div>
+            <span id="online-count" class="pr-1"></span>online
         </div>
         <div id='chat_container' class="overflow-y-auto grow">
             <ul id='chat_messages' class="flex flex-col justify-end gap-2 p-4">
@@ -16,10 +19,11 @@
         <div class="sticky bottom-0 z-10 p-2 bg-gray-800">
     <div class="flex items-center rounded-xl px-2 py-2">
         <form id="chat_message_form" class="w-full flex"
-        hx-post="{% url 'chatting' %}"
-        hx-target="#chat_messages"
-        hx-swap="beforeend"
-        _="on htmx:afterRequest reset() me">
+              id="chat_message_form" class="w-full flex" onsubmit="playSound()"
+        hx-ext="ws"
+        ws-connect="/ws/chatroom/public-chat"
+        ws-send
+        _="on htmx:wsAfterSend reset() me">
             {% csrf_token %}
             {{ form.body }}
             <button class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md" type="submit">Send</button>
@@ -37,6 +41,11 @@
     function scrollToBottom() {
         const container = document.getElementById('chat_container');
         container.scrollTop = container.scrollHeight;
+    }
+
+     function playSound() {
+        const sound = new Audio('{% static "images/RZFWLXE-bell-hop-bell.mp3" %}');
+        sound.play();
     }
     scrollToBottom();
 </script>

@@ -21,7 +21,7 @@
         <ul class="flex items-center navitems flex-col md:flex-row gap-8 md:gap-0 justify-center h-full -translate-y-10 md:translate-y-0">
             {% if user.is_authenticated %}
             <li><a href="/">Home</a></li>
-                <li><a href="{% url 'chatting' %}">Chat</a></li>    
+                <li><a href="{% url 'chatting' %}">Chat</a></li>
             <li><a href="{% url 'post-create' %}">Create Post</a></li>
             <li x-data="{ dropdownOpen: false }" class="relative">
                 <a @click="dropdownOpen = !dropdownOpen" @click.away="dropdownOpen = false" class="cursor-pointer select-none">
@@ -35,7 +35,7 @@
                 x-transition:enter-end="opacity-100 translate-y-0 scale-100">
                     <ul class="hoverlist [&>li>a]:justify-end">
                         <li><a href="{% url 'profile' %}">My Profile</a></li>
-                        <li><a href="{% url 'profile-edit' %}">Edit Profile</a></li>
+                        <li><a href="{% url 'profile-edit'  %}">Edit Profile</a></li>
                         <li><a href="{% url 'logout' %}">Log Out</a></li>
                     </ul>
                 </div>
