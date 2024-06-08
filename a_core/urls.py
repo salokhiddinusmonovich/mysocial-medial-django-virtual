@@ -9,6 +9,9 @@ from account.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('chatting/', include('a_rchat.urls')),
+
+
     path('', home_view, name='home'),
     path('category/<tag>/', home_view, name='category'),
     path('post/create/', post_create_view, name='post-create'),
@@ -22,6 +25,7 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('logout/', logout, name='logout'),
     path('profile/', profile_view, name='profile'),
+    path('profile/<str:username>/', profile_view, name='profile'),
     path('<username>/', profile_view, name='userprofile'),
     path('profile/edit/', profile_edit_view, name='profile-edit'),
     path('profile/delete/', profile_delete_view, name='profile-delete'),

@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$lnw0tzqevtlrfsa-sju5^#@7^qad4ev4jn(t%jh1)(=)bft$^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -40,9 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
+
+    
+    # apps
     'a_posts',
     'a_users',
     'account',
+    'a_rchat',
     'django_htmx',
 
 ]
@@ -88,23 +92,23 @@ WSGI_APPLICATION = 'a_core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config['NAME'],
-        'USER': config['USER'],
-        'PASSWORD': config['PASSWORD'],
-        'HOST': config['HOST'],
-        'PORT': config['PORT'],
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': config['NAME'],
+#         'USER': config['USER'],
+#         'PASSWORD': config['PASSWORD'],
+#         'HOST': config['HOST'],
+#         'PORT': config['PORT'],
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
