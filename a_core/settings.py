@@ -101,7 +101,6 @@ ASGI_APPLICATION = 'a_core.asgi.application'
 
 CHANNEL_LAYERS = {
     "default": {
-        # This example app uses the Redis channel layer implementation channels_redis
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
             "hosts": [('localhost', 6379)],
