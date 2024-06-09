@@ -1,7 +1,6 @@
 {% extends 'layouts/b.html' %}
 {% load static %}
 
-
 {% block content %}
 <wrapper class="block max-w-2xl mx-auto my-10 px-6">
     <div id="chat_window" class="h-[45rem] flex flex-col bg-gray-800 rounded-2xl shadow-2xl relative p-1">
@@ -17,24 +16,22 @@
             </ul>
         </div>
         <div class="sticky bottom-0 z-10 p-2 bg-gray-800">
-    <div class="flex items-center rounded-xl px-2 py-2">
-        <form id="chat_message_form" class="w-full flex"
-              id="chat_message_form" class="w-full flex" onsubmit="playSound()"
-        hx-ext="ws"
-        ws-connect="/ws/chatroom/public-chat"
-        ws-send
-        _="on htmx:wsAfterSend reset() me">
-            {% csrf_token %}
-            {{ form.body }}
-            <button class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md" type="submit">Send</button>
-        </form>
-    </div>
-</div>
-
+            <div class="flex items-center rounded-xl px-2 py-2">
+                <form id="chat_message_form" class="w-full flex"
+                      onsubmit="playSound(); return false;"
+                      hx-ext="ws"
+                      ws-connect="/ws/chatroom/public-chat"
+                      ws-send
+                      _="on htmx:wsAfterSend reset() me">
+                    {% csrf_token %}
+                    {{ form.body }}
+                    <button class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md" type="submit">Send</button>
+                </form>
+            </div>
+        </div>
     </div>
 </wrapper>
 {% endblock %}
-
 
 {% block javascript %}
 <script>
@@ -43,44 +40,40 @@
         container.scrollTop = container.scrollHeight;
     }
 
-     function playSound() {
+    function playSound() {
         const sound = new Audio('{% static "images/RZFWLXE-bell-hop-bell.mp3" %}');
         sound.play();
     }
     scrollToBottom();
 
+    const chatroomName = "public-chat";  // Update with the actual chatroom name if needed
+    const chatSocket = new WebSocket(
+        'ws://' + window.location.host + '/ws/chat/' + chatroomName + '/'
+    );
 
-    const chatroomName = JSON.parse(document.getElementById('chatroom-name').textContent);
-const chatSocket = new WebSocket(
-    'ws://' + window.location.host + '/ws/chat/' + chatroomName + '/'
-);
+    chatSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        const chatMessages = document.getElementById('chat_messages');
+        const newMessage = document.createElement('li');
+        newMessage.textContent = data.body;
+        chatMessages.appendChild(newMessage);
+        scrollToBottom();
+        playSound();
+    };
 
-chatSocket.onmessage = function(e) {
-    const data = e.data;
-    document.querySelector('#chat-log').innerHTML += (data + '<br>');
-};
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
 
-chatSocket.onclose = function(e) {
-    console.error('Chat socket closed unexpectedly');
-};
-
-document.querySelector('#chat-message-input').focus();
-document.querySelector('#chat-message-input').onkeyup = function(e) {
-    if (e.keyCode === 13) {  // Enter key
-        document.querySelector('#chat-message-submit').click();
-    }
-};
-
-document.querySelector('#chat-message-submit').onclick = function(e) {
-    const messageInputDom = document.querySelector('#chat-message-input');
-    const message = messageInputDom.value;
-    chatSocket.send(JSON.stringify({
-        'body': message
-    }));
-    messageInputDom.value = '';
-};
-
-
-
+    const chatMessageForm = document.getElementById('chat_message_form');
+    chatMessageForm.onsubmit = function(e) {
+        const messageInputDom = chatMessageForm.querySelector('input[name="body"]');
+        const message = messageInputDom.value;
+        chatSocket.send(JSON.stringify({
+            'body': message
+        }));
+        messageInputDom.value = '';
+        e.preventDefault();
+    };
 </script>
 {% endblock %}
