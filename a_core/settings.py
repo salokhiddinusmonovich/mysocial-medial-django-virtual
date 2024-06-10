@@ -136,11 +136,10 @@ DATABASES = {
         'NAME': config['NAME'],
         'USER': config['USER'],
         'PASSWORD': config['PASSWORD'],
-        'HOST': 'db',
+        'HOST': config['HOST'],
         'PORT': config['PORT'],
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

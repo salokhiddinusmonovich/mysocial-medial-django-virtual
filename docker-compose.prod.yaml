@@ -28,7 +28,7 @@ services:
   db:
     image: postgres:16
     env_file:
-      - .db.env
+      - .env
     networks:
       - webnet
 
