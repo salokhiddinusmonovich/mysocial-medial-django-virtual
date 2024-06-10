@@ -1,22 +1,37 @@
 version: '3'
 
 services:
-  web:
+  django_wsgi:
+    container_name: django_wsgi
     build: .
-    command: daphne -b 0.0.0.0 -p 8000 a_core.asgi:application
-    expose:
-      - 8000
+    command: uwsgi --socket=:9000 --module=a_core.wsgi:application --py-autoreload=1
     volumes:
-      - media_file:/app/media
-      - static_files:/app/staticfiles
-    depends_on:
-      - db
+      - .:/code
+    networks:
+      - webnet
+      - redisnet
+    links:
+      - redis
+
+  django_asgi:
+    container_name: django_asgi
+    build: .
+    # command: python manage.py runserver 0.0.0.0:8000
+    command: daphne -b 0.0.0.0 -p 8000 a_core.asgi:application
+    volumes:
+      - .:/code
+    networks:
+      - webnet
+      - redisnet
+    links:
       - redis
 
   db:
     image: postgres:16
     env_file:
       - .db.env
+    networks:
+      - webnet
 
   nginx:
     build: ./nginx
@@ -26,13 +41,20 @@ services:
       - media_file:/app/media
       - static_files:/app/staticfiles
     depends_on:
-      - web
+      - django_wsgi
+      - django_asgi
+    networks:
+      - webnet
 
   redis:
-    image: redis:alpine
-    container_name: redis
-    restart: unless-stopped
+    image: redis:latest
+    networks:
+      - redisnet
 
 volumes:
   media_file:
   static_files:
+
+networks:
+  webnet:
+  redisnet:

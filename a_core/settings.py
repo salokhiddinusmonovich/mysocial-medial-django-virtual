@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$lnw0tzqevtlrfsa-sju5^#@7^qad4ev4jn(t%jh1)(=)bft$^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -99,16 +99,24 @@ ASGI_APPLICATION = 'a_core.asgi.application'
 # }
 
 
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             'hosts': [('127.0.0.1', 6379)],
+#         },
+#     },
+# }
+
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            'hosts': [('127.0.0.1', 6379)],
+    "default": {
+        # This example app uses the Redis channel layer implementation channels_redis
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("localhost", 6379)],
         },
     },
 }
-
-
 
 
 
@@ -121,7 +129,7 @@ CHANNEL_LAYERS = {
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-#
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
