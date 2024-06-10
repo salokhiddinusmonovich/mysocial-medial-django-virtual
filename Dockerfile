@@ -4,7 +4,7 @@ FROM python:3.10-slim
 WORKDIR /code
 
 # Install dependencies
-COPY requirements.txt /code/
+COPY r.txt /code/
 RUN pip install --upgrade pip && pip install -r r.txt
 
 # Install uWSGI
