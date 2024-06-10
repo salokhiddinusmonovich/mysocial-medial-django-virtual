@@ -4,6 +4,8 @@ ENV REDIS_HOST "redis"
 RUN mkdir /code
 WORKDIR /code
 COPY r.txt .
+
+RUN pip install --upgrade pip
 RUN pip install -r r.txt
-ADD . .
+COPY . .
 #RUN python manage.py migrate
