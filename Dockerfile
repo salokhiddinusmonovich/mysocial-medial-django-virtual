@@ -8,4 +8,5 @@ COPY r.txt .
 RUN pip install --upgrade pip
 RUN pip install -r r.txt
 COPY . .
+# Run Django migrations
 RUN #python manage.py migrate
