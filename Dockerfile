@@ -3,7 +3,7 @@ ENV PYTHONUNBUFFERED 1
 ENV REDIS_HOST "redis"
 RUN mkdir /code
 WORKDIR /code
-COPY r.txt /code/
+COPY r.txt .
 RUN pip install -r r.txt
-ADD . /code/
+ADD . .
 #RUN python manage.py migrate
