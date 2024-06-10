@@ -1,27 +1,9 @@
-FROM python:3.10-slim
-
-# Set environment variables
+FROM python:3.6-stretch
 ENV PYTHONUNBUFFERED 1
 ENV REDIS_HOST "redis"
-
-# Set the working directory
+RUN mkdir /code
 WORKDIR /code
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    gcc \
-    python3-dev \
-    libpq-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy the requirements file
-COPY r.txt /code/
-
-# Upgrade pip and install dependencies
-RUN pip install --upgrade pip && pip install -r r.txt
-
-# Copy the project files
-COPY . /code/
-
-
+COPY requirements.txt /code/
+RUN pip install -r requirements.txt
+ADD . /code/
+#RUN python manage.py migrate
