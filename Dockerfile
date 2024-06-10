@@ -1,4 +1,4 @@
-FROM python:3.10-stretch
+FROM python:3.10
 ENV PYTHONUNBUFFERED 1
 ENV REDIS_HOST "redis"
 RUN mkdir /code
