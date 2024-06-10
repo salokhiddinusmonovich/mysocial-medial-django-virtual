@@ -1,17 +1,9 @@
-FROM python:3.10-slim
-
-# Set the working directory
+FROM python:3.6-stretch
+ENV PYTHONUNBUFFERED 1
+ENV REDIS_HOST "redis"
+RUN mkdir /code
 WORKDIR /code
-
-# Install dependencies
 COPY r.txt /code/
-RUN pip install --upgrade pip && pip install -r r.txt
-
-# Install uWSGI
-RUN pip install uwsgi
-
-# Copy the project files
-COPY . /code/
-
-# Collect static files
-RUN python manage.py collectstatic --noinput
+RUN pip install -r r.txt
+ADD . /code/
+RUN python manage.py migrate
