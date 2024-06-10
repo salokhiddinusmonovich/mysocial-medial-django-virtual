@@ -24,5 +24,4 @@ RUN pip install --upgrade pip && pip install -r r.txt
 # Copy the project files
 COPY . /code/
 
-# Migrate the database
-RUN python manage.py migrate
+
