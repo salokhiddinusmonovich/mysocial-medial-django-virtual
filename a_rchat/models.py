@@ -21,3 +21,9 @@ class GroupMessage(models.Model):
 
     class Meta:
         ordering = ['-created']
+
+
+
+class SoundTracks(models.Model):
+    name = models.CharField(max_length=15)
+    sound = models.FileField(upload_to='sounds/')
