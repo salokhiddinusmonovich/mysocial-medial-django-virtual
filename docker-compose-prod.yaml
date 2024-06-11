@@ -11,7 +11,9 @@ services:
     build: ./django_channels
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./django_channels:/django_channels
+      - ./a_core:/a_rchat
+      - media_file:/app/media
+      - static_files:/app/staticfiles
     ports:
       - "8000:8000"
     depends_on:
@@ -39,3 +41,17 @@ services:
     image: postgres:16
     env_file:
       - .db.env
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    volumes:
+      - media_file:/app/media
+      - static_files:/app/staticfiles
+    depends_on:
+      - web
+
+volumes:
+  media_file:
+  static_files:
