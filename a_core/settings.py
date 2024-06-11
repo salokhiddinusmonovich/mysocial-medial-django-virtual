@@ -12,13 +12,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
-# from dotenv import dotenv_values
+from dotenv import dotenv_values
 
-import environ
-
-env = environ.Env()
-
-# config = dotenv_values(".env")
+config = dotenv_values(".env")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -134,26 +130,14 @@ CHANNEL_LAYERS = {
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'socialmedia',
-#         'USER': 'salah',
-#         'PASSWORD': '1',
-#         'HOST': 'db',
-#         'PORT': '5432',
-#     }
-# }
-
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('POSTGRES_DB'),
-        'USER': env('POSTGRES_USER'),
-        'PASSWORD': env('POSTGRES_PASSWORD'),
-        'HOST': 'db',  # Use the service name from docker-compose.yml
-        'PORT': '',  # Use the default port
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config['NAME'],
+        'USER': config['USER'],
+        'PASSWORD': config['PASSWORD'],
+        'HOST': config['HOST'],
+        'PORT': config['PORT'],
     }
 }
 
