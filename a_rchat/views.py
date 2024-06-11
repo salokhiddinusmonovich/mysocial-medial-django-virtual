@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import ChatMessageCreateForm
 
 @login_required
-def chat_view(request, chatroom_name):
-    chat_group = get_object_or_404(ChatGroup, group_name=chatroom_name)
+def chat_view(request):
+    chat_group = get_object_or_404(ChatGroup, group_name="public-chat")
     chat_messages = chat_group.chat_messages.all()[:30]
     form = ChatMessageCreateForm()
 

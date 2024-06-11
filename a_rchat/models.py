@@ -24,6 +24,3 @@ class GroupMessage(models.Model):
 
 
 
-class SoundTracks(models.Model):
-    name = models.CharField(max_length=15)
-    sound = models.FileField(upload_to='sounds/')
