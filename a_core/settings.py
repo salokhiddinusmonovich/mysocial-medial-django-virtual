@@ -108,26 +108,26 @@ ASGI_APPLICATION = 'a_core.asgi.application'
 #     },
 # }
 
-# CHANNEL_LAYERS = {
-#     "default": {
-#         # This example app uses the Redis channel layer implementation channels_redis
-#         "BACKEND": "channels_redis.core.RedisChannelLayer",
-#         "CONFIG": {
-#             "hosts": [("redis", 6379)],
-#         },
-#     },
-# }
-
-
 CHANNEL_LAYERS = {
     "default": {
+        # This example app uses the Redis channel layer implementation channels_redis
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("redis://redis:6379/1", 6379)],
+            "hosts": [("redis", 6379)],
         },
-        "ROUTING": "a_rchat.routing.websocket_urlpatterns",
     },
 }
+
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("redis://redis:6379/1", 6379)],
+#         },
+#         "ROUTING": "a_rchat.routing.websocket_urlpatterns",
+#     },
+# }
 
 
 # Database

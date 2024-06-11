@@ -1,11 +1,6 @@
 version: '3'
 
 services:
-  redis:
-    image: redis
-    command: redis-server
-    ports:
-      - '6379:6379'
 
   web:
     build: .
@@ -41,6 +36,11 @@ services:
     image: postgres:16
     env_file:
       - .db.env
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: unless-stopped
 
   nginx:
     build: ./nginx
