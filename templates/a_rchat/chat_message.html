@@ -1,7 +1,7 @@
 {% if message.author == user %}
     <li class="flex justify-end mb-4">
         <div class="bg-green-200 rounded-l-lg rounded-tr-lg p-4 max-w-[75%]">
-            <span>{{ message.body }}</span>
+            {% include 'a_rchat/partials/message_content.html' %}
         </div>
         <div class="flex items-end">
             <svg height="13" width="8">
@@ -14,7 +14,7 @@
         <div class="flex justify-start">
             <div class="flex items-end mr-2">
                 <a href="{% url 'profile_pr' message.author.username %}">
-    <img class="w-8 h-8 rounded-full object-cover" src="{{ message.author.profile.avatar }}">
+                    <img class="w-8 h-8 rounded-full object-cover" src="{{ message.author.profile.avatar }}">
 </a>
 
             </div>
@@ -23,8 +23,8 @@
                     <path fill="white" d="M2.8,13L8,13L8,0.2C7.1,5.5,6.5,8.7,1.7,10.4C-1.6,11.5,1,13,2.8,13z"></path>
                 </svg>
             </div>
-            <div class="bg-white p-4 max-w-[75%] rounded-r-lg rounded-tl-lg">
-                <span>{{ message.body }}</span>
+            <div class="bg-white p-3 max-w-[75%] rounded-r-lg rounded-tl-lg">
+                {% include 'a_rchat/partials/message_content.html' %}
             </div>
         </div>
         <div class="text-sm font-light py-1 ml-10">

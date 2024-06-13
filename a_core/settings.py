@@ -99,57 +99,50 @@ ASGI_APPLICATION = 'a_core.asgi.application'
 # }
 
 
-# CHANNEL_LAYERS = {
-#     'default': {
-#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
-#         'CONFIG': {
-#             'hosts': [('127.0.0.1', 6379)],
-#         },
-#     },
-# }
-
 CHANNEL_LAYERS = {
-    "default": {
-        # This example app uses the Redis channel layer implementation channels_redis
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("redis", 6379)],
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)],
         },
+
     },
 }
 
-
 # CHANNEL_LAYERS = {
 #     "default": {
+#         # This example app uses the Redis channel layer implementation channels_redis
 #         "BACKEND": "channels_redis.core.RedisChannelLayer",
 #         "CONFIG": {
-#             "hosts": [("redis://redis:6379/1", 6379)],
+#             "hosts": [("redis", 6379)],
 #         },
-#         "ROUTING": "a_rchat.routing.websocket_urlpatterns",
 #     },
 # }
+
+
+
 
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config['NAME'],
-        'USER': config['USER'],
-        'PASSWORD': config['PASSWORD'],
-        'HOST': config['HOST'],
-        'PORT': config['PORT'],
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': config['NAME'],
+#         'USER': config['USER'],
+#         'PASSWORD': config['PASSWORD'],
+#         'HOST': config['HOST'],
+#         'PORT': config['PORT'],
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

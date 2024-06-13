@@ -1,0 +1,12 @@
+{% if message.body %}
+    <span>{{ message.body }}</span>
+{% elif message.file %}
+    {% if message.is_image %}
+        <img class="max-w-72 min-w-8" src="{{ message.file.url }}" alt="">
+    {% else %}
+        <div class="flex items-center">
+            <span>&#x1F4CE;</span>
+            <a class="cursor-pointer italic hover:underline" href="{{ message.file.url }}" download="{{ message.filename }}">{{ message.filename }}</a>
+        </div>
+    {% endif %}
+{% endif %}

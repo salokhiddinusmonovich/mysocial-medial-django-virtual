@@ -4,3 +4,4 @@ from .models import GroupMessage, ChatGroup
 admin.site.register(ChatGroup)
 admin.site.register(GroupMessage)
 
+
