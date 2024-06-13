@@ -17,6 +17,8 @@ django-allauth==0.63.0
 django-cleanup==8.1.0
 django-environ==0.11.2
 django-htmx==1.17.3
+django-parler==2.3
+django-parler-rest==2.2
 djangorestframework==3.15.1
 gunicorn==22.0.0
 hyperlink==21.0.0
@@ -34,6 +36,7 @@ python-dotenv==1.0.1
 redis==5.0.5
 requests==2.31.0
 service-identity==24.1.0
+shortuuid==1.0.13
 six==1.16.0
 soupsieve==2.5
 sqlparse==0.5.0
