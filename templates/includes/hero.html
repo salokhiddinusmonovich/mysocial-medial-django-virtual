@@ -1,6 +1,6 @@
-<hero class="grid bg-gray-1000 text-white text-center bg-cover z-10 relative bg-[url('https://img.gg.deals/18/95/8149e18fad7c7794678bbef11b40ae2712f7_1920xt1080_S1000.jpg')]">
-    <div class="col-start-1 row-start-1 bg-gray-799 bg-opacity-40 w-full h-full"></div>
-    <div class="col-start-1 row-start-1 py-24 px-10 ">
+<hero class="grid bg-gray-700 text-white text-center bg-cover bg-center z-10 relative bg-[url('https://wallpapercave.com/wp/wp9379091.jpg')]">
+    <div class="col-start-1 row-start-1 bg-gray-800 bg-opacity-40 w-full h-full"></div>
+    <div class="col-start-1 row-start-1 py-24 px-10">
         <h1 class="font1 text-6xl title-fadein">Virtual</h1>
         <p class="text-lg font-bold mb-5">Share your favorite Photos from Flickr and add a great caption</p>
         {% if not user.is_authenticated %}
@@ -10,3 +10,11 @@
         {% endif %}
     </div>
 </hero>
+
+<style>
+    hero {
+        min-height: 50vh;
+        background-size: cover;
+        background-position: center;
+    }
+</style>
