@@ -1,4 +1,4 @@
-# mysocial-medial-django-vertual
+# mysocial-medial-django-virtual
 ![image](https://github.com/salokhiddinusmonovich/mysocial-medial-django-virtual/assets/157391066/c72fd4c4-cd9e-49dc-be74-03052538b0e0)
 
 ![image](https://github.com/salokhiddinusmonovich/mysocial-medial-django-virtual/assets/157391066/6274255a-0db1-4393-b716-2a0dbcfa0464)
