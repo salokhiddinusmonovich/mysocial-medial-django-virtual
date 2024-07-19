@@ -102,7 +102,7 @@ ASGI_APPLICATION = 'a_core.asgi.application'
 #         "BACKEND": "channels.layers.InMemoryChannelLayer",
 #     }
 # }
-
+#
 # CHANNEL_LAYERS = {
 #     'default': {
 #         'BACKEND': 'channels_redis.core.RedisChannelLayer',

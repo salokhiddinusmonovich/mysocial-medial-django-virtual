@@ -1,6 +1,6 @@
 {% extends 'message_board/blank.html' %}
 
-{% block content %} 
+{% block content %}
 
 <wrapper class="block h-[calc(100vh-80px)] pt-8 pb-4 px-4 max-w-7xl mx-auto">
 
@@ -28,7 +28,6 @@
                     </div>
                 </article>
                 {% endfor %}
-
                 
             </div>
 
@@ -38,9 +37,10 @@
                         <img class="w-10 h-10 md:w-14 md:h-14 object-cover rounded-full" src="{{ user.profile.avatar }}">
                     </div>
                     <div class="w-full rounded-xl">
-                        <form method="POST" class="w-full">
+                        <form method="POST" class="w-full flex items-center gap-4">
                             {% csrf_token %}
-                            {{ form }}
+                            {{ form.body }}
+                            <button type="submit" class="ml-2 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-md transition duration-200">Send</button>
                         </form>
                     </div>
                 </div>
@@ -54,19 +54,18 @@
                 <h2>You are subscribed!</h2>
                 {% else %}
                 <h2>Subscribe</h2>
-                {% endif %} 
+                {% endif %}
                 <div class="block text-sm mb-2">Subscribe to this Message Board to get email notifications and newsletters</div>
                 {% if user in messageboard.subscribers.all %}
-                <a href="{% url 'subscribe' %}" class="inline-block bg-gray-300 hover:bg-red-500 text-white font-bold rounded-full py-3 px-4">Unsubscribe</a>
+                <a href="{% url 'subscribe' %}" class="inline-block bg-gray-300 hover:bg-red-500 text-white font-bold rounded-full py-3 px-4 transition duration-200">Unsubscribe</a>
                 {% else %}
-                <a href="{% url 'subscribe' %}" class="inline-block bg-black hover:bg-emerald-500 text-white font-bold rounded-full py-3 px-4">Subscribe</a>
+                <a href="{% url 'subscribe' %}" class="inline-block bg-black hover:bg-emerald-500 text-white font-bold rounded-full py-3 px-4 transition duration-200">Subscribe</a>
                 {% endif %}
             </div>
 
             <div class="rounded-2xl border-2 border-gray-200 p-4">
-                <h2>{{ messageboard.subscribers.count }} subscriber{{ messageboard.subscribers.count|pluralize }}</h2> 
+                <h2>{{ messageboard.subscribers.count }} subscriber{{ messageboard.subscribers.count|pluralize }}</h2>
                 <ul class="grid grid-cols-3">
-
                     {% for subscriber in messageboard.subscribers.all %}
                     <li class="block mb-2">
                         <a href="{% url 'profile_pr' subscriber.username %}">
@@ -77,23 +76,18 @@
                         </a>
                     </li>
                     {% endfor %}
-
-
                 </ul>
             </div>
         </div>
-
         
-         
     </div>
 </wrapper>
 
-
 <script>
     function scrollToBottom() {
-            const container = document.getElementById('messages');
-            container.scrollTop = container.scrollHeight;
-        }
+        const container = document.getElementById('messages');
+        container.scrollTop = container.scrollHeight;
+    }
 
     window.onload = function() {
         scrollToBottom();

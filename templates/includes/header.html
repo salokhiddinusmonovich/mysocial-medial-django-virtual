@@ -24,6 +24,7 @@
             <li><a href="/">Home</a></li>
            <li> <a href="{% url 'chat_view' %}">Chat</a></li>
             <li><a href="{% url 'post-create' %}">Create Post</a></li>
+            <li><a href="{% url 'messageboard' %}">Message Board</a></li>
             <li x-data="{ dropdownOpen: false }" class="relative">
                 <a @click="dropdownOpen = !dropdownOpen" @click.away="dropdownOpen = false" class="cursor-pointer select-none">
                     <img class="h-8 w-8 rounded-full object-cover" src="{{ user.profile.avatar }}"/>
