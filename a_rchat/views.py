@@ -57,3 +57,41 @@ def chat_file_upload(request):
 
 
 
+
+
+
+@login_required
+def private_view(request):
+    chat_group = get_object_or_404(ChatGroup, group_name="public-chat")
+    chat_messages = chat_group.chat_messages.all()[:30]
+    form = ChatMessageCreateForm()
+
+
+    if request.htmx:
+        form = ChatMessageCreateForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.author = request.user
+            message.group = chat_group
+            message.save()
+            context = {
+                'message': message,
+                'user': request.user
+            }
+            return render(request, 'a_rchat/partials/chat_message_p.html', context)
+
+    return render(request, 'a_rchat/chat.html', {'chat_messages': chat_messages, 'form': form})
+
+
+# @login_required
+# def get_or_create_chatroom(request, username):
+#     if request.user.username == username:
+#         return redirect('home')
+#     other_user = User.objects.get(username=username)
+#     my_chayrooms = request.user.chat_private.filter(is_private=True)
+#
+#     if my_chayrooms.exists():
+#         for chatroom in my_chayrooms:
+#             if other_user in chatroom.members.all():
+#                 chatroom = chatroom
+#                 break

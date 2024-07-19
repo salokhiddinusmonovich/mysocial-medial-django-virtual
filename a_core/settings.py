@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$lnw0tzqevtlrfsa-sju5^#@7^qad4ev4jn(t%jh1)(=)bft$^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
-
+    'django_celery_results',
+    'django_celery_beat',
     
     # apps
     'a_posts',
@@ -49,8 +50,12 @@ INSTALLED_APPS = [
     'account',
     'a_rchat',
     'django_htmx',
+    'a_messageboard'
+
 
 ]
+
+
 
 SITE_ID = 1
 
@@ -98,7 +103,6 @@ ASGI_APPLICATION = 'a_core.asgi.application'
 #     }
 # }
 
-
 # CHANNEL_LAYERS = {
 #     'default': {
 #         'BACKEND': 'channels_redis.core.RedisChannelLayer',
@@ -108,6 +112,9 @@ ASGI_APPLICATION = 'a_core.asgi.application'
 #
 #     },
 # }
+
+
+
 
 CHANNEL_LAYERS = {
     "default": {
@@ -193,5 +200,35 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 LOGIN_REDIRECT_URL = '/'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'usmonovsalokhiddin@gmail.com'
+EMAIL_HOST_PASSWORD = 'uhck qnyy eeok lrys'
+
+# EMAIL_HOST = 'fkqs iglr xrho cnwq'
+
 ACCOUNT_USERNAME_BLACKLIST = ['admin', 'accounts', 'profile', 'category', 'posts']
+
+
+
+
+
+
+
+# # CELERY
+#
+# CELERY_BROKER_URL = 'redis://localhost:6379/0'
+# CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+# CELERY_RESULT_BACKEND = 'django-db'
+# CELERY_RESULT_EXTENDED = True
+
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_TIMEZONE = 'Asia/Tashkent'

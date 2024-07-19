@@ -51,6 +51,24 @@ services:
       - static_files:/app/staticfiles
     depends_on:
       - web
+  celery:
+    build: .
+    command: celery -A a_core worker -l INFO
+    restart: unless-stopped
+    depends_on:
+      - web
+      - redis
+  flower:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '5555:5555'
+    command: "celery -A a_core flower --address=0.0.0.0"
+    depends_on:
+      - celery
+    restart: unless-stopped
+
 
 volumes:
   media_file:

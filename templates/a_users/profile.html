@@ -25,6 +25,9 @@
                         {% else %}
                         I am a person!😝
                         {% endif %}
+                    {% if profile.user != user %}
+                        <a class="button" href="{% url 'profile_pr' profile.user.username %}">Chat with me</a>
+                    {% endif %}
                     </div>
                 </div>
             </div>

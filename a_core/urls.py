@@ -5,13 +5,13 @@ from django.conf import settings
 
 from a_posts.views import *
 from a_users.views import *
+
 from account.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('messageboard/', include('a_messageboard.urls')),
     path('chatting/', include('a_rchat.urls')),
-
-
     path('', home_view, name='home'),
     path('category/<tag>/', home_view, name='category'),
     path('post/create/', post_create_view, name='post-create'),
@@ -32,7 +32,7 @@ urlpatterns = [
     path('comment/delete/<pk>/', comment_delete_view, name='comment-delete'),
     path('reply-sent/<pk>/', reply_sent, name='reply-sent'),
     path('reply/delete/<pk>/', reply_delete_view, name='reply-delete'),
-    path('<username>/', profile_view, name='profile_pr')
+    path('<username>/', profile_view, name='profile_pr'),
 ]
 
 

@@ -61,3 +61,5 @@ def profile_delete_view(request):
         return redirect('home')
 
     return render(request, 'a_users/profile_delete.html')
+
+

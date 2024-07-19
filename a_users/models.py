@@ -29,3 +29,8 @@ class Profile(models.Model):
         else:
             name = self.user.username
         return name
+
+
+class SupportMe(models.Model):
+    author = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, related_name='support_me')
+    message = models.CharField(max_length=150)
