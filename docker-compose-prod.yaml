@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -19,7 +18,7 @@ services:
     command: python manage.py runworker
     volumes:
       - ./a_core:/a_rchat
-    links:
+    depends_on:
       - redis
 
   channels:
@@ -29,7 +28,7 @@ services:
       - ./a_core:/a_rchat
     ports:
       - "8001:8001"
-    links:
+    depends_on:
       - redis
 
   db:
@@ -51,6 +50,7 @@ services:
       - static_files:/app/staticfiles
     depends_on:
       - web
+
   celery:
     build: .
     command: celery -A a_core worker -l INFO
@@ -58,6 +58,9 @@ services:
     depends_on:
       - web
       - redis
+    environment:
+      - BROKER_URL=redis://redis:6379/0
+
   flower:
     build:
       context: .
@@ -65,10 +68,11 @@ services:
     ports:
       - '5555:5555'
     command: "celery -A a_core flower --address=0.0.0.0"
+    environment:
+      - BROKER=redis://redis:6379/0
     depends_on:
       - celery
     restart: unless-stopped
-
 
 volumes:
   media_file:
