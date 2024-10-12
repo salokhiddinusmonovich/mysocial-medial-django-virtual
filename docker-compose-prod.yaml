@@ -54,6 +54,8 @@ services:
   celery:
     build: .
     command: celery -A a_core worker -l INFO
+    environment:
+      - BROKER_URL=redis://redis:6379/0
     restart: unless-stopped
     depends_on:
       - web
