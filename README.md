@@ -1,11 +1,12 @@
 # mysocial-medial-django-virtual
-![image](https://github.com/salokhiddinusmonovich/mysocial-medial-django-virtual/assets/157391066/c72fd4c4-cd9e-49dc-be74-03052538b0e0)
+![image](https://github.com/user-attachments/assets/ebb65a35-dc41-47c6-8bff-02d891b11f97)
 
-![image](https://github.com/salokhiddinusmonovich/mysocial-medial-django-virtual/assets/157391066/6274255a-0db1-4393-b716-2a0dbcfa0464)
+![image](https://github.com/user-attachments/assets/bc99942e-4a96-45d7-b378-51c1e124ba5e)
 
-![image](https://github.com/salokhiddinusmonovich/mysocial-medial-django-virtual/assets/157391066/4ef32179-d60a-49b0-bbd1-607c915795c8)
+![image](https://github.com/user-attachments/assets/f8ba982f-26e8-4415-b8a3-4638fa655c05)
 
-![image](https://github.com/salokhiddinusmonovich/mysocial-medial-django-virtual/assets/157391066/867b2a95-a441-4328-ae41-f8391019abe0)
+![image](https://github.com/user-attachments/assets/3fec0bb9-2ca1-4557-b757-b138573d87e0)
 
+![image](https://github.com/user-attachments/assets/afbf4523-ec01-4ed6-b64d-76db1403b3c4)
 
 
