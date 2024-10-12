@@ -9,7 +9,7 @@ services:
       - media_file:/app/media
       - static_files:/app/staticfiles
     ports:
-      - "8000:8000"
+      - "8080:8080"
     depends_on:
       - db
 
@@ -18,7 +18,7 @@ services:
     command: python manage.py runworker
     volumes:
       - ./a_core:/a_rchat
-    depends_on:
+    links:
       - redis
 
   channels:
@@ -28,7 +28,7 @@ services:
       - ./a_core:/a_rchat
     ports:
       - "8001:8001"
-    depends_on:
+    links:
       - redis
 
   db:
@@ -58,22 +58,19 @@ services:
     depends_on:
       - web
       - redis
-    environment:
-      - BROKER_URL=redis://redis:6379/0
 
   flower:
-  build:
-    context: .
-    dockerfile: Dockerfile
-  ports:
-    - '5555:5555'
-  command: "celery -A a_core flower --address=0.0.0.0"
-  environment:
-    - BROKER=redis://redis:6379/0
-  depends_on:
-    - celery
-  restart: unless-stopped
-
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '5555:5555'
+    command: "celery -A a_core flower --address=0.0.0.0"
+    environment:
+      - BROKER=redis://redis:6379/0
+    depends_on:
+      - celery
+    restart: unless-stopped
 
 volumes:
   media_file:
