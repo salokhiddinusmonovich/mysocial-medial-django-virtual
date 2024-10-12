@@ -62,6 +62,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    environment:
+      - BROKER_URL=redis://redis:6379/0
     ports:
       - '5555:5555'
     command: "celery -A a_core flower --address=0.0.0.0"
