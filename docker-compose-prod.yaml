@@ -1,7 +1,4 @@
-version: '3'
-
 services:
-
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -14,17 +11,9 @@ services:
     depends_on:
       - db
 
-  worker_channels:
-    build: .
-    command: python manage.py runworker
-    volumes:
-      - ./a_core:/a_rchat
-    links:
-      - redis
-
   channels:
     build: .
-    command: daphne -b 0.0.0.0 -p 8001 a_core.asgi:channel_layer
+    command: daphne -b 0.0.0.0 -p 8001 a_core.asgi:application  # Ensure correct path to asgi.py
     volumes:
       - ./a_core:/a_rchat
     ports:
@@ -51,6 +40,7 @@ services:
       - static_files:/app/staticfiles
     depends_on:
       - web
+
   celery:
     build: .
     command: celery -A a_core worker -l INFO
@@ -60,6 +50,7 @@ services:
     depends_on:
       - web
       - redis
+
   flower:
     build:
       context: .
@@ -72,8 +63,3 @@ services:
     depends_on:
       - celery
     restart: unless-stopped
-
-
-volumes:
-  media_file:
-  static_files:
