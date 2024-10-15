@@ -1,3 +1,5 @@
+version: '3'
+
 services:
   web:
     build: .
@@ -13,7 +15,7 @@ services:
 
   channels:
     build: .
-    command: daphne -b 0.0.0.0 -p 8001 a_core.asgi:application  # Ensure correct path to asgi.py
+    command: daphne -b 0.0.0.0 -p 8001 a_core.asgi:application
     volumes:
       - ./a_core:/a_rchat
     ports:
@@ -63,3 +65,7 @@ services:
     depends_on:
       - celery
     restart: unless-stopped
+
+volumes:
+  media_file:
+  static_files:
