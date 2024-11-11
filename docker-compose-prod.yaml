@@ -3,24 +3,24 @@ version: '3'
 services:
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:9000
     volumes:
-      - ./a_core:/a_rchat
+      - ./a_core:/app/a_core
       - media_file:/app/media
       - static_files:/app/staticfiles
     ports:
-      - "8000:8000"
+      - "9000:9000"
     depends_on:
       - db
 
   channels:
     build: .
-    command: daphne -b 0.0.0.0 -p 8001 a_core.asgi:application
+    command: daphne -b 0.0.0.0 -p 8002 a_core.asgi:application
     volumes:
-      - ./a_core:/a_rchat
+      - ./a_core:/app/a_core
     ports:
-      - "8001:8001"
-    links:
+      - "8002:8002"
+    depends_on:
       - redis
 
   db:
@@ -36,12 +36,13 @@ services:
   nginx:
     build: ./nginx
     ports:
-      - "8080:80"
+      - "80:80"
     volumes:
       - media_file:/app/media
       - static_files:/app/staticfiles
     depends_on:
       - web
+      - channels
 
   celery:
     build: .
