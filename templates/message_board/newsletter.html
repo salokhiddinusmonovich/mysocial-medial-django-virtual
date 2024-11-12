@@ -8,47 +8,119 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #333;
+            background-image: url('https://i.pinimg.com/564x/64/51/07/6451071c2dc7d8f84c6e2da5ea3b9fa0.jpg');
+            background-size: cover;
+            background-position: center;
         }
+
         .container {
             width: 100%;
             max-width: 600px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center; /* Center all text */
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 3px solid black; /* Black border added here */
         }
+
         .header {
-            padding-bottom: 20px;
+            padding: 20px;
+            color: #fff;
+            background-image: url('https://i.pinimg.com/564x/a6/0e/d5/a60ed56d65139b84c33a8111647a5b25.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 250px;
         }
+
         .header img {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
+            margin-bottom: 10px;
+        }   
+
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
         }
+
         .content {
-            padding: 20px 0;
+            padding: 20px;
+            color: #555;
         }
+
+        .content h1 {
+            font-size: 22px;
+            color: #333;
+        }
+
+        .content p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #375ec900;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #4e54c8;
+        }
+
         .footer {
-            padding-top: 20px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-top: 1px solid #e0e0e0;
             font-size: 12px;
-            color: #777777;
+            color: #777;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+            .content h1 {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img src="http://salokhiddinusmonov.myddns.me/media/avatars/photo_2024-07-19_15-13-14.jpg" alt="Newsletter Logo">
+            <h1>Daily Newsletter</h1>
         </div>
+
+        <!-- Content Section -->
         <div class="content">
-            <h1>Assalomu Aleykum {{ name }}</h1>
-            <p>Welcome to the daily newsletter!</p>
-            <p>Stay tuned for updates and more information.</p>
-            <p>Now {{ sub }} subscribers in my messageboard.</p>
+            <h1>Assalomu Aleykum, {{ name }}!</h1>
+            <p>Welcome to our daily newsletter. We are excited to have you with us.</p>
+            <p>Stay tuned for the latest updates, news, and exclusive content delivered right to your inbox.</p>
+            <p>We now have <strong>{{ sub }}</strong> amazing subscribers in our community!</p>
+            <a href="#" class="button">Explore More</a>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <p>&copy; 2024 Newsletter Service. All rights reserved.</p>
+            <p>If you wish to unsubscribe, click <a href="#">here</a>.</p>
         </div>
     </div>
 </body>

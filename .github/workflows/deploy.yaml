@@ -1,0 +1,27 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Connect to server via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          command_timeout: 360m
+          script: |
+            echo "Hello, server!"
+            cd mysocial-medial-django-virtual/
+            git pull origin master
+            echo 'project updated'
+            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S docker-compose -f docker-compose-prod.yaml run --rm web python manage.py migrate
+            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S docker-compose -f docker-compose-prod.yaml up -d --build && docker-compose -f production.yml restart nginx
+            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S docker image prune --filter 'dangling=true' -f

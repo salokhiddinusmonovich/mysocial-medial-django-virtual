@@ -1,11 +1,34 @@
 {% extends 'layouts/c.html' %}
 
 {% block content %}
+<style>
+    .hidden-description {
+        display: none;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 300px;
+        margin: auto;
+    }
+    label, input {
+        display: block;
+        width: 100%;
+    }
+</style>
+
     <h1>Login Here</h1>
     <form method="POST" autocomplete="off">
         {% csrf_token %}
-
-        {{ login.as_p }}
+        <div>
+            {{ login.username.label_tag }}
+            {{ login.username }}
+        </div>
+        <div>
+            {{ login.password.label_tag }}
+            {{ login.password }}
+        </div>
 
         <input type="submit" value="Login"/>
     </form>
