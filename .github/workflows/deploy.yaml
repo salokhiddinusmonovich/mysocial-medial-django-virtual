@@ -22,6 +22,14 @@ jobs:
           script: |
             echo "Deploying to server..."
 
+            # Check Docker version
+            echo "Checking Docker version..."
+            docker --version
+
+            # Check Docker Compose version
+            echo "Checking Docker Compose version..."
+            docker-compose --version
+
             # Build and start the Docker containers in detached mode
             echo "Building and starting the Docker containers..."
             docker-compose -f docker-compose-prod.yaml up -d --build
