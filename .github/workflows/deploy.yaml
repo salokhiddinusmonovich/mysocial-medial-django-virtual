@@ -30,4 +30,4 @@ jobs:
             echo "Running migrations..."
             docker-compose -f docker-compose-prod.yaml exec web python manage.py migrate
 
-            echo "Deployment successful!"
+            echo "Deployment successful Salokh!"
