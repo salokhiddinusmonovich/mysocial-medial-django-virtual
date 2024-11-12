@@ -1,27 +1,33 @@
-name: Deploy to Server
-
+name: Deploy via SSH
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Connect to server via SSH
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SERVER }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.PRIVATE_KEY }}
-          command_timeout: 360m
+          host: ${{ secrets.SSH_HOST }}        # The server you're connecting to
+          username: ${{ secrets.SSH_USERNAME }} # Your SSH username
+          key: ${{ secrets.SSH_PRIVATE_KEY }}   # Your private SSH key
+          port: 22                             # Optional: default is 22
           script: |
-            echo "Hello, server!"
-            cd mysocial-medial-django-virtual/
-            git pull origin master
-            echo 'project updated'
-            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S docker-compose -f docker-compose-prod.yaml run --rm web python manage.py migrate
-            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S docker-compose -f docker-compose-prod.yaml up -d --build && docker-compose -f production.yml restart nginx
-            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S docker image prune --filter 'dangling=true' -f
+            echo "Deploying to server..."
+
+            # Build and start the Docker containers in detached mode
+            echo "Building and starting the Docker containers..."
+            docker-compose -f docker-compose-prod.yaml up -d --build
+
+            # Run migrations in the 'web' container
+            echo "Running migrations..."
+            docker-compose -f docker-compose-prod.yaml exec web python manage.py migrate
+
+            echo "Deployment successful!"
