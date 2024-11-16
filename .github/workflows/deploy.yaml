@@ -15,10 +15,12 @@ jobs:
       
       - name: Set up Docker
         run: |
-          cd mysocial-medial-django-virtual/
+          cd $GITHUB_WORKSPACE/mysocial-medial-django-virtual/
           docker-compose -f docker-compose-prod.yaml down
           docker-compose -f docker-compose-prod.yaml pull
           docker-compose -f docker-compose-prod.yaml up -d --build
           docker-compose -f docker-compose-prod.yaml exec web python manage.py migrate --noinput
           docker-compose -f docker-compose-prod.yaml exec web python manage.py collectstatic --noinput
           docker-compose -f docker-compose-prod.yaml exec web python manage.py check
+      
+
