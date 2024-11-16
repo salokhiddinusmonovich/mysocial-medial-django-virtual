@@ -13,9 +13,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: List files for debugging
+        run: ls -la
+
+      - name: Navigate to project directory
+        run: cd mysocial-medial-django-virtual && ls -la
+
       - name: Set up Docker
         run: |
-          cd mysocial-medial-django-virtual/
+          cd mysocial-medial-django-virtual
           docker-compose -f docker-compose-prod.yaml down
           docker-compose -f docker-compose-prod.yaml pull
           docker-compose -f docker-compose-prod.yaml up -d --build
