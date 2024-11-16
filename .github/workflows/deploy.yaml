@@ -16,11 +16,18 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8
+        # Updated to Python 3.10 for compatibility
+        python-version: 3.10
 
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
+        # Install requirements with version check for autobahn
+        if python --version | grep -q "3.8"; then
+          pip install autobahn<23.6.0
+        else
+          pip install autobahn
+        fi
         pip install -r r.txt
 
     - name: Run Tests
@@ -32,8 +39,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.10
+
     - name: Deploy to Production
       run: |
-        # Add your deployment script or commands here
         docker-compose -f docker-compose-prod.yaml up -d --build
         docker-compose -f docker-compose-prod.yaml exec web python manage.py migrate
