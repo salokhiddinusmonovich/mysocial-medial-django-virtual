@@ -1,42 +1,59 @@
 {% extends 'layouts/c.html' %}
 
 {% block content %}
-    <style>
-        .hidden-description {
-            display: none;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            max-width: 300px;
-            margin: auto;
-        }
-        label, input {
-            display: block;
-            width: 100%;
-        }
-    </style>
+<style>
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out both;
+}
+</style>
 
-    <h1>Register Now</h1>
-    <form method="POST" autocomplete="off">
-        {% csrf_token %}
-        <div>
-            {{ form.username.label_tag }}
-            {{ form.username }}
-        </div>
-        <div>
-            {{ form.email.label_tag }}
-            {{ form.email }}
-        </div>
-        <div>
-            {{ form.password1.label_tag }}
-            {{ form.password1 }}
-        </div>
-        <div>
-            {{ form.password2.label_tag }}
-            {{ form.password2 }}
-        </div>
-        <input type="submit" value="Register"/>
+<div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 px-4">
+  <div class="w-full max-w-md bg-white p-6 sm:p-8 rounded-2xl shadow-xl animate-fade-in-up">
+    <h1 class="text-3xl font-bold text-center mb-8 text-blue-800">Register Now</h1>
+
+    <form method="POST" autocomplete="off" class="space-y-6">
+      {% csrf_token %}
+
+      <!-- Username -->
+      <div>
+        <label class="block text-sm font-medium text-blue-900 mb-1">Username</label>
+        {{ form.username.as_widget|safe }}
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label class="block text-sm font-medium text-blue-900 mb-1">Email</label>
+        {{ form.email.as_widget|safe }}
+      </div>
+
+      <!-- Password 1 -->
+      <div>
+        <label class="block text-sm font-medium text-blue-900 mb-1">Password</label>
+        {{ form.password1.as_widget|safe }}
+      </div>
+
+      <!-- Password 2 -->
+      <div>
+        <label class="block text-sm font-medium text-blue-900 mb-1">Confirm Password</label>
+        {{ form.password2.as_widget|safe }}
+      </div>
+
+      <!-- Submit -->
+      <button type="submit"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg shadow-md transition duration-300">
+        Register
+      </button>
     </form>
+  </div>
+</div>
 {% endblock %}

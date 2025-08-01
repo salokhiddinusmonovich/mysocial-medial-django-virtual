@@ -44,34 +44,49 @@ def post_create_view(request):
     form = PostCreatForm()
     if request.method == 'POST':
         form = PostCreatForm(request.POST)
-        try:
-            if form.is_valid():
-                post = form.save(commit=False)
+        if form.is_valid():
+            post = form.save(commit=False)
+            url = form.cleaned_data['url']
 
-                website = requests.get(form.data['url'])
-                sourcecode = BeautifulSoup(website.text, 'html.parser')
+            try:
+                headers = {
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9",
+                    "Accept-Language": "en-US,en;q=0.9",
+                    "Referer": "https://www.pinterest.com/"
+                }
 
-                find_image = sourcecode.select('meta[content^="https://live.staticflickr.com/"]')
-                image = find_image[0]['content']
-                post.image = image
+                response = requests.get(url, headers=headers)
+                if response.status_code != 200:
+                    return HttpResponse(f"Request failed: status code {response.status_code}", content_type="text/plain")
 
-                find_title = sourcecode.select('h1.photo-title')
-                title = find_title[0].text.strip()
-                post.title = title
+                soup = BeautifulSoup(response.text, 'html.parser')
 
-                find_artist = sourcecode.select('a.owner-name')
-                artist = find_artist[0].text.strip()
-                post.artist = artist
+                # Извлечение изображения
+                image_tag = soup.select_one('meta[property="og:image"]')
+                post.image = image_tag['content'] if image_tag and 'content' in image_tag.attrs else None
+
+                # Извлечение заголовка / описания
+                title_tag = soup.select_one('meta[property="og:description"]')
+                post.title = title_tag['content'].strip() if title_tag else 'Untitled'
+
+                # Извлечение автора
+                author_tag = soup.select_one('meta[name="pinterestapp:owner_name"]')
+                post.artist = author_tag['content'].strip() if author_tag else 'Unknown'
 
                 post.author = request.user
 
                 post.save()
                 form.save_m2m()
-                messages.success(request, 'Post created')
+
+                messages.success(request, 'Post created successfully.')
                 return redirect('home')
-        except Exception as e:
-            return HttpResponse("I said from the Flickr: https://www.flickr.com/explore/",content_type="text/plain")
-    return render(request, 'a_posts/post_create.html', {'form' : form})
+
+            except Exception as e:
+                return HttpResponse(f"Error while parsing: {str(e)}", content_type="text/plain")
+
+    return render(request, 'a_posts/post_create.html', {'form': form})
+
 
 
 

@@ -2,34 +2,46 @@
 
 {% block content %}
 <style>
-    .hidden-description {
-        display: none;
-    }
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        max-width: 300px;
-        margin: auto;
-    }
-    label, input {
-        display: block;
-        width: 100%;
-    }
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out both;
+}
 </style>
 
-    <h1>Login Here</h1>
-    <form method="POST" autocomplete="off">
-        {% csrf_token %}
-        <div>
-            {{ login.username.label_tag }}
-            {{ login.username }}
-        </div>
-        <div>
-            {{ login.password.label_tag }}
-            {{ login.password }}
-        </div>
+<div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 px-4">
+  <div class="w-full max-w-md bg-white p-6 sm:p-8 rounded-2xl shadow-xl animate-fade-in-up">
+    <h1 class="text-3xl font-bold text-center mb-8 text-blue-800">Login</h1>
 
-        <input type="submit" value="Login"/>
+    <form method="POST" autocomplete="off" class="space-y-6">
+      {% csrf_token %}
+
+      <!-- Username -->
+      <div>
+        <label class="block text-sm font-medium text-blue-900 mb-1">Username</label>
+        {{ login.username.as_widget|safe }}
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label class="block text-sm font-medium text-blue-900 mb-1">Password</label>
+        {{ login.password.as_widget|safe }}
+      </div>
+
+      <!-- Submit -->
+      <button type="submit"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg shadow-md transition duration-300">
+        Login
+      </button>
     </form>
+  </div>
+</div>
 {% endblock %}
