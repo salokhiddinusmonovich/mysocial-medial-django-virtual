@@ -1,12 +1,13 @@
-<hero class="grid bg-gray-700 text-white text-center bg-cover bg-center z-10 relative bg-[url('https://wallpapercave.com/wp/wp9379091.jpg')]">
+<hero
+    class="grid bg-gray-700 text-white text-center bg-cover bg-center z-10 relative bg-[url('https://wallpapers.com/images/hd/hello-neighbor-wi6727z02uxe09xl.jpg')]">
     <div class="col-start-1 row-start-1 bg-gray-800 bg-opacity-40 w-full h-full"></div>
     <div class="col-start-1 row-start-1 py-24 px-10">
         <h1 class="font1 text-6xl title-fadein">Virtual</h1>
-        <p class="text-lg font-bold mb-5">Share your favorite Photos from Flickr and add a great caption</p>
+        <p class="text-lg font-bold mb-5">Share your favorite Photos from Painterest and add a great caption</p>
         {% if not user.is_authenticated %}
         <a class="button" href="{% url 'register' %}">Get Started</a>
         {% else %}
-         <a class="button" href="{% url 'post-create' %}">Get Started</a>
+        <a class="button" href="{% url 'post-create' %}">Get Started</a>
         {% endif %}
     </div>
 </hero>

@@ -1,9 +1,12 @@
 {% load static %}
 <article class="card">
     <div class="flex items-center justify-between px-4 h-14">
-        <h3 class="text-start leading-5 mr-1">{{ post.title }}</h3>
-        <div class="text-sm text-gray-400 truncate">flickr<a href="{{ post.url }}" class="hover:underline ml-1" target="blank">@{{ post.artist }}</a></div>
+        <h3 class="text-start leading-5 mr-1 truncate max-w-[60%]" title="{{ post.title }}">{{ post.title }}</h3>
+        <div class="text-sm text-gray-400 truncate max-w-[40%]" title="@{{ post.artist }}">
+            painterest<a href="{{ post.url }}" class="hover:underline ml-1" target="_blank">@{{ post.artist }}</a>
+        </div>
     </div>
+
     <figure>
         <a href="{% url 'post' post.id %}"><img class="w-full" src="{{ post.image }}"></a>
     </figure>
@@ -23,18 +26,20 @@
         <p class="text-5xl mb-10 px-4 font1">{{ post.body }}</p>
         <div class="flex items-center gap-2 text-sm mb-5 flex-wrap">
             {% for tag in post.tags.all %}
-            <a href="{% url 'category' tag.slug %}" class="bg-gray-200 rounded-full px-3 py-1 hover:bg-gray-800 hover:text-white">{{ tag }}</a>
+            <a href="{% url 'category' tag.slug %}"
+                class="bg-gray-200 rounded-full px-3 py-1 hover:bg-gray-800 hover:text-white">{{ tag }}</a>
             {% endfor %}
         </div>
         <div class="flex items-center justify-between text-sm px-2">
             <a class="font-bold hover:underline" href="{% url 'post' post.id %}">
                 {% if post.comments.count %}
                 Comments
-                <span id="commentscount-{{ post.id }}" class="font-light text-gray-500 ml-1">{{ post.comments.count }}</span>
+                <span id="commentscount-{{ post.id }}" class="font-light text-gray-500 ml-1">{{ post.comments.count
+                    }}</span>
                 {% else %}
-                    {% if user.is_authenticated %}
-                    Add comment
-                    {% endif %}
+                {% if user.is_authenticated %}
+                Add comment
+                {% endif %}
                 {% endif %}
             </a>
             <div class="flex items-center gap-4 [&>a:hover]:underline">
