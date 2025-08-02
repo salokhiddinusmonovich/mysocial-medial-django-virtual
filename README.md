@@ -1,12 +1,38 @@
-# mysocial-medial-django-virtual
-![image](https://github.com/user-attachments/assets/ebb65a35-dc41-47c6-8bff-02d891b11f97)
+# Virtual Social Network with Pinterest Parser and Real-time Chat
 
-![image](https://github.com/user-attachments/assets/bc99942e-4a96-45d7-b378-51c1e124ba5e)
+A full-featured social networking platform built with Django and Docker. It includes real-time chat via WebSockets, content parsing from Pinterest, and background task processing for email notifications. The project is deployed using Nginx and Docker Compose.
 
-![image](https://github.com/user-attachments/assets/f8ba982f-26e8-4415-b8a3-4638fa655c05)
+## 🔧 Tech Stack
 
-![image](https://github.com/user-attachments/assets/3fec0bb9-2ca1-4557-b757-b138573d87e0)
+- **Backend:** Django, Django Channels, Celery, Redis
+- **Frontend:** HTML, Tailwind CSS (optional), HTMX / Alpine.js (if used)
+- **Database:** PostgreSQL
+- **Async Tasks:** Celery + Redis
+- **Parsing:** Beautiful Soup (Pinterest content)
+- **Deployment:** Docker, Docker Compose, Nginx, Gunicorn
+- **Monitoring:** Flower (Celery dashboard)
 
-![image](https://github.com/user-attachments/assets/afbf4523-ec01-4ed6-b64d-76db1403b3c4)
+## 💡 Features
 
+- ✅ User registration and authentication
+- ✅ Real-time chat using Django Channels and WebSockets
+- ✅ Pinterest parser with Beautiful Soup (images, titles, etc.)
+- ✅ Email notifications (e.g., new users) using Celery
+- ✅ PostgreSQL for storing user data, chat history, and parsed content
+- ✅ Task monitoring with Flower
+- ✅ Production-ready deployment with Docker + Nginx
 
+## 🌐 Live Demo
+
+http://37.221.193.231/
+
+> Note: Hosted on a personal VPS. Uptime not guaranteed.
+
+## 🛠 Setup & Run (Docker)
+
+```bash
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+
+# Build and run all services
+docker-compose up --build
