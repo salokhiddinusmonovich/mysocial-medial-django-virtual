@@ -12,6 +12,8 @@ services:
       - "9000:9000"
     depends_on:
       - db
+    networks:
+      - mynetwork
 
   channels:
     build: .
@@ -45,6 +47,9 @@ services:
       - web
       - channels
 
+    networks:
+      - mynetwork
+    
   celery:
     build: .
     command: celery -A a_core worker -l INFO
@@ -71,3 +76,8 @@ services:
 volumes:
   media_file:
   static_files:
+
+
+networks:
+  mynetwork:
+    driver: bridge
