@@ -24,6 +24,8 @@ services:
       - "8002:8002"
     depends_on:
       - redis
+    networks:
+      - mynetwork
 
   db:
     image: postgres:16
