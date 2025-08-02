@@ -3,7 +3,7 @@ version: '3'
 services:
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:9000
+    command: gunicorn a_core.wsgi:application --bind 0.0.0.0:9000
     volumes:
       - ./a_core:/app/a_core
       - media_file:/app/media
