@@ -5,11 +5,11 @@ A full-featured social networking platform built with Django and Docker. It incl
 ## 🔧 Tech Stack
 
 - **Backend:** Django, Django Channels, Celery, Redis
-- **Frontend:** HTML, Tailwind CSS (optional), HTMX / Alpine.js (if used)
+- **Frontend:** HTML, Tailwind CSS, HTMX / Javascrip
 - **Database:** PostgreSQL
 - **Async Tasks:** Celery + Redis
 - **Parsing:** Beautiful Soup (Pinterest content)
-- **Deployment:** Docker, Docker Compose, Nginx, Gunicorn
+- **Deployment:** Docker, Docker Compose, Nginx, Gunicorn, Daphne 
 - **Monitoring:** Flower (Celery dashboard)
 
 ## 💡 Features
