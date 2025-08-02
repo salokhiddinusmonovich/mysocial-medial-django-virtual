@@ -12,8 +12,6 @@ services:
       - "9000:9000"
     depends_on:
       - db
-    networks:
-      - mynetwork
 
   channels:
     build: .
@@ -24,8 +22,6 @@ services:
       - "8002:8002"
     depends_on:
       - redis
-    networks:
-      - mynetwork
 
   db:
     image: postgres:16
@@ -49,9 +45,6 @@ services:
       - web
       - channels
 
-    networks:
-      - mynetwork
-    
   celery:
     build: .
     command: celery -A a_core worker -l INFO
@@ -80,6 +73,3 @@ volumes:
   static_files:
 
 
-networks:
-  mynetwork:
-    driver: bridge
