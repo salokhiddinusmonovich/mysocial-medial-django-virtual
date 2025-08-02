@@ -31,8 +31,8 @@ http://37.221.193.231/
 ## 🛠 Setup & Run (Docker)
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https:https://github.com/salokhiddinusmonovich/mysocial-medial-django-virtual.git
+cd mysocial-medial-django-virtual
 
 # Build and run all services
-docker-compose up --build
+sudo docker compose -f docker-compose-yaml.prod up --build 
